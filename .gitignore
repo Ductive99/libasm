@@ -3,7 +3,7 @@ subject*
 
 build/
 
-libsam.a
+libasm.a
 
 **/.o
 **/.out
