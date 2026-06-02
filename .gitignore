@@ -1,0 +1,11 @@
+
+subject*
+
+build/
+
+libsam.a
+
+**/.o
+**/.out
+**/.swp
+
