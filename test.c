@@ -6,7 +6,7 @@
 /*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:31:21 by esouhail          #+#    #+#             */
-/*   Updated: 2026/06/02 18:42:32 by esouhail         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:28:46 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	test_ft_strlen(void);
 void	test_ft_strcmp(void);
+void	test_ft_strcpy(void);
 
 i32	main(void)
 {
 	test_ft_strlen();
 	test_ft_strcmp();
+	test_ft_strcpy();
 }
 
 void	test_ft_strlen(void)
@@ -89,4 +91,57 @@ void	test_ft_strcmp(void)
 	mylen = ft_strcmp("\x80", "\x01"); len = strcmp("\x80", "\x01");
 	assert(mylen > 0 && len > 0);
 	printf(">\\x80<\t>\\x01<:\n\tft_strcmp: %d, strcmp: %d\n\n", mylen, len);
+}
+
+#include <stdlib.h>
+void	test_ft_strcpy(void)
+{
+	char	ft[256];
+	char	std[256];
+	char	*r;
+ 
+	printf("\n==========     FT_STRCPY TESTS     ==========\n");
+ 
+	// --- basic string ---
+	r = ft_strcpy(ft, "hello"); strcpy(std, "hello");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s<:\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", "hello", ft, std);
+ 
+	// --- empty string ---
+	r = ft_strcpy(ft, ""); strcpy(std, "");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s<:\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", "(empty)", ft, std);
+ 
+	// --- single char ---
+	r = ft_strcpy(ft, "A"); strcpy(std, "A");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s<:\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", "A", ft, std);
+ 
+	// --- spaces ---
+	r = ft_strcpy(ft, "hello world  !"); strcpy(std, "hello world  !");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s<:\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", "hello world  !", ft, std);
+ 
+	// --- overwrite existing content ---
+	memcpy(ft, "old_content\0", 12); memcpy(std, "old_content\0", 12);
+	r = ft_strcpy(ft, "new"); strcpy(std, "new");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s< over \"old_content\":\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", "new", ft, std);
+ 
+	// --- long string ---
+	const char	*lng = "abcdefghijklmnopqrstuvwxyz0123456789";
+	r = ft_strcpy(ft, lng); strcpy(std, lng);
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">%s<:\n\tft_strcpy: \"%s\", strcpy: \"%s\"\n\n", lng, ft, std);
+ 
+	// --- high ASCII (unsigned byte behavior) ---
+	r = ft_strcpy(ft, "\x7f\xc8\xff"); strcpy(std, "\x7f\xc8\xff");
+	assert(strcmp(ft, std) == 0 && r == ft);
+	printf(">\\x7f\\xc8\\xff<:\n\tft_strcpy: match: %s\n\n", strcmp(ft, std) == 0 ? "yes" : "no");
+ 
+	// --- return value points to dst ---
+	char	buf[64];
+	r = ft_strcpy(buf, "retval check");
+	assert(r == buf);
+	printf(">retval check<:\n\treturn == dst: %s\n\n", r == buf ? "yes" : "no");
 }
