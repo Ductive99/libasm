@@ -6,7 +6,7 @@
 ;    By: esouhail <ductive99.github.io>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2026/06/02 16:39:40 by esouhail          #+#    #+#              ;
-;    Updated: 2026/06/02 18:40:04 by esouhail         ###   ########.fr        ;
+;    Updated: 2026/06/03 09:15:53 by esouhail         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -15,18 +15,17 @@ section .text
 global ft_strcmp
 
 ft_strcmp:
-    xor     rax, rax
+    xor     rcx, rcx
 .loop:
-    mov     r8b, byte [rdi+rax]
-    mov     r9b, byte [rsi+rax]
-    cmp     r8b, r9b
+    movzx   eax, byte [rdi+rcx]
+    movzx   edx, byte [rsi+rcx]
+    cmp     eax, edx
     jne     .done
-    cmp     r8b, 0
-    je      .done
-    inc     rax
+    test    eax, eax
+    jz      .done
+    inc     rcx
     jmp     .loop
 .done:
-    sub     r8, r9
-    mov     rax, r8
+    sub     eax, edx
     ret
 
