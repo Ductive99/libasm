@@ -6,7 +6,7 @@
 /*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:31:21 by esouhail          #+#    #+#             */
-/*   Updated: 2026/06/03 19:26:25 by esouhail         ###   ########.fr       */
+/*   Updated: 2026/06/04 15:30:46 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	test_ft_strcmp(void);
 void	test_ft_strcpy(void);
 void	test_ft_write(void);
 void	test_ft_read(void);
+void	test_ft_strdup(void);
 
 i32	main(void)
 {
@@ -25,6 +26,7 @@ i32	main(void)
 	test_ft_strcpy();
 	test_ft_write();
 	test_ft_read();
+	test_ft_strdup();
 }
 
 void	test_ft_strlen(void)
@@ -97,7 +99,6 @@ void	test_ft_strcmp(void)
 	printf(">\\x80<\t>\\x01<:\n\tft_strcmp: %d, strcmp: %d\n\n", mylen, len);
 }
 
-#include <stdlib.h>
 void	test_ft_strcpy(void)
 {
 	char	ft[256];
@@ -171,8 +172,6 @@ void	test_ft_write(void)
 	}
 }
 
-#include <errno.h>
-#include <fcntl.h>
 void	test_ft_read(void)
 {
 	int		ft_pfd[2];
@@ -303,4 +302,25 @@ void	test_ft_read(void)
 		printf(">(long string) %zu bytes<:\n\tft_read: \"%.*s\" ret=%zd\n\tread:    \"%.*s\" ret=%zd\n\n",
 				lng_len, (int)ft_ret, ft_buf, ft_ret, (int)std_ret, std_buf, std_ret);
 	}
+}
+void	test_ft_strdup(void)
+{
+	char	*my_dup, *std_dup;
+
+	printf("\n==========      FT_STRDUP TESTS      ==========\n");
+
+	const char	*s1 = "Hello World!!!";
+	my_dup = ft_strdup(s1); std_dup = strdup(s1); assert(strcmp(my_dup, std_dup) == 0);
+	printf(">%s<:\n\tft_strdup: %s, strdup: %s\n\n", s1, my_dup, std_dup);
+	free(my_dup); free(std_dup);
+
+	const char	*s2 = "1234567890 1234567890 1234567890";
+	my_dup = ft_strdup(s2); std_dup = strdup(s2); assert(strcmp(my_dup, std_dup) == 0);
+	printf(">%s<:\n\tft_strdup: %s, strdup: %s\n\n", s2, my_dup, std_dup);
+	free(my_dup); free(std_dup);
+
+	const char	*s3 = "";
+	my_dup = ft_strdup(s3); std_dup = strdup(s3); assert(strcmp(my_dup, std_dup) == 0);
+	printf(">%s<:\n\tft_strdup: %s, strdup: %s\n\n", s3, my_dup, std_dup);
+	free(my_dup); free(std_dup);
 }

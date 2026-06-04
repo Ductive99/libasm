@@ -17,6 +17,8 @@ rebuilding some libc functions in x86_64 using nasm.
 
 - [Nasm Documentation](https://www.nasm.us/xdoc/2.15.05/html/nasmdoc3.html)
 - [Linux Kernel x86_64 entry files](https://github.com/torvalds/linux)
+- [Calling Conventions](https://wiki.osdev.org/Calling_Conventions)
+- [Introduction to Dynamic Linking](https://www.technovelty.org/linux/plt-and-got-the-key-to-code-sharing-and-dynamic-libraries.html)
 - Common sense
 - A lot of research
 

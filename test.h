@@ -6,7 +6,7 @@
 /*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:56:01 by esouhail          #+#    #+#             */
-/*   Updated: 2026/06/03 18:57:23 by esouhail         ###   ########.fr       */
+/*   Updated: 2026/06/04 15:30:27 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 # include <stdint.h>
 # include <string.h>
 # include <assert.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>
 
 # define i32 int32_t
 
